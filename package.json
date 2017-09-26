@@ -1,0 +1,23 @@
+{
+  "name": "pgjs",
+  "version": "1.0.0",
+  "description": "using PG and JS",
+  "main": "index.js",
+  "dependencies": {
+    "pg": "^7.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moogsG/pgjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moogsG/pgjs/issues"
+  },
+  "homepage": "https://github.com/moogsG/pgjs#readme"
+}
