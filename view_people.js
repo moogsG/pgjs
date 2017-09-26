@@ -10,10 +10,11 @@ knex('famous_people').select()
   .then((list) => {
     console.log('Searching...');
     print(list);
-    knex.destroy();
   })
   .catch((err) => {
     console.error(err);
+  })
+  .then(() =>{
     knex.destroy();
   });
 

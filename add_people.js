@@ -12,9 +12,10 @@ let values = {
 knex('famous_people').insert(values)
   .then(() => {
     console.log('Inserted data');
-    knex.destroy();
   })
   .catch((err) => {
     console.error(err);
+  })
+  .then(() =>{
     knex.destroy();
   });
