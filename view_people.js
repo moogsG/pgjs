@@ -4,6 +4,7 @@ knex('famous_people').select()
   .where('last_name', '=', values)
   .orWhere('first_name', '=', values)
   .then((list) => {
+    console.log('Searching...');
     print(list);
 
     return knex.destroy();
@@ -14,9 +15,11 @@ knex('famous_people').select()
   });
 
 let print = (list) => {
-  let id = list[0].id;
-  let firstName = list[0].first_name;
-  let lastName = list[0].last_name;
-  let date = list[0].birthdate.toISOString().substr(0, 10);
-  console.log(id + ': ' + firstName + ' ' + lastName + ', born "' + date + '"');
+  console.log('Found ' + list.length + ' person(s) by the name ' + values + ':')
+  for(let person of list){
+    console.log(person.id + ': ' +
+                person.first_name + ' ' +
+                person.last_name + ', born "' +
+                person.birthdate.toISOString().substr(0, 10) + '"');
+  }
 }

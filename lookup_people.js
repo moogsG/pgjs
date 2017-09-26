@@ -10,6 +10,8 @@ const client = new pg.Client({
   port     : settings.port,
   ssl      : settings.ssl
 });
+
+
 let lookup = process.argv.slice(2);
 
 const query = {
@@ -17,11 +19,6 @@ const query = {
   text: 'SELECT id, first_name, last_name, birthdate FROM famous_people WHERE last_name = $1::text;',
   values: lookup
 }
-
-/*node lookup_people.js Lincoln
-Searching ...
-Found 1 person(s) by the name 'Lincoln':
-- 1: Abraham Lincoln, born '1809-02-12'*/
 
 client.connect((err) => {
   if (err) {
@@ -32,8 +29,19 @@ client.connect((err) => {
     if (err) {
       return console.error("error running query", err);
     }
-    console.log('Found ' + res.rows.length + ' person(s) by the name ' + lookup + ':')
-    console.log(res.rows[0].id + ': ' + res.rows[0].first_name + ' ' + res.rows[0].last_name + ', born "' + res.rows[0].birthdate + '"'); //output: 1
+    print(res.rows);
     client.end();
   });
+
 });
+
+
+let print = (list) => {
+  console.log('Found ' + list.length + ' person(s) by the name ' + query.name + ':')
+  for(let person of list){
+    console.log(person.id + ': ' +
+                person.first_name + ' ' +
+                person.last_name + ', born "' +
+                person.birthdate.toISOString().substr(0, 10) + '"');
+  }
+}
